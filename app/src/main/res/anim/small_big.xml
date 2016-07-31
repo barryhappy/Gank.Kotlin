@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 定义放大进入的动画 -->
+    <scale 
+        android:duration="500"
+        android:fromXScale="0"
+        android:toXScale="1"
+        android:fromYScale="0"
+        android:toYScale="1"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        />
+
+</set>

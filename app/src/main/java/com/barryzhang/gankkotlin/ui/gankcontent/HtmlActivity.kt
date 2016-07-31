@@ -1,0 +1,132 @@
+package com.barryzhang.gankkotlin.ui.gankcontent
+
+import android.graphics.Color
+import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.View
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import butterknife.BindView
+import com.barryzhang.gankkotlin.R
+import com.barryzhang.gankkotlin.entities.GankItem
+import com.barryzhang.gankkotlin.ui.base.BaseActivity
+import com.barryzhang.gankkotlin.utils.DrawableUtil
+import net.steamcrafted.materialiconlib.MaterialDrawableBuilder
+
+/**
+ * https://github.com/barryhappy
+ * Created by Barry on 16/7/28
+ */
+
+class HtmlActivity : BaseActivity(), GankContentContract.View {
+    lateinit var p: GankContentContract.Presenter
+    override fun setPresenter(presenter: GankContentContract.Presenter) {
+        this.p = presenter
+    }
+
+    @BindView(R.id.webView)
+    lateinit var webView: WebView
+    @BindView(R.id.fab)
+    lateinit var fab: FloatingActionButton
+    @BindView(R.id.toolbar)
+    lateinit var toolbar: Toolbar
+    @BindView(R.id.viewCover)
+    lateinit var viewCover: View
+
+    lateinit var mOptionsMenu: Menu
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        GankContentPresenter(this)
+        super.onCreate(savedInstanceState)
+    }
+
+
+    override fun getLayoutResourceID(): Int {
+        return R.layout.activity_html
+    }
+
+    override fun afterInject() {
+
+    }
+
+    override fun start() {
+        this.p.start()
+    }
+
+
+    override fun loadGankUrl(url: String?) {
+        webView.loadUrl(url)
+    }
+
+    override fun init(gank: GankItem) {
+        initToolbar(gank)
+        initWebView()
+        this.p.afterViewInit()
+    }
+
+    override fun onFavoriteChanged(isFavorite: Boolean) {
+        refreshMenu(isFavorite)
+
+        fab.setImageDrawable(DrawableUtil.buildMaterialDrawable(
+                MaterialDrawableBuilder.with(this)
+                        .setIcon(if (isFavorite) MaterialDrawableBuilder.IconValue.STAR
+                                 else MaterialDrawableBuilder.IconValue.STAR_OUTLINE)
+                        .setColor(Color.WHITE)
+                        .setSizeDp(20)))
+    }
+
+    override fun showVideoTipCover() {
+        fab.post({
+            val snackBar = Snackbar.make(fab,
+                    "如需播放视频，选择『在浏览器中打开』，进行播放",
+                    Snackbar.LENGTH_INDEFINITE).setAction("我知道啦",
+                    { viewCover.visibility = View.GONE })
+                    .setActionTextColor(Color.parseColor("#cccccc"))
+            snackBar.view.setBackgroundColor(Color.parseColor("#ff4081"))
+            snackBar.show()
+        })
+        viewCover.visibility = View.VISIBLE
+    }
+
+    override fun getGankData(): GankItem {
+        return intent.getSerializableExtra("gankItem") as GankItem
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.html, menu)
+        mOptionsMenu = menu
+        return true
+    }
+
+    fun initToolbar(gank: GankItem) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = gank.desc
+        toolbar.setNavigationOnClickListener { back() }
+    }
+
+    fun initWebView() {
+        webView.settings.setAppCachePath(filesDir.path + "/cache")
+        webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
+        webView.settings.domStorageEnabled = true
+        webView.settings.allowFileAccess = true
+        webView.settings.setAppCacheEnabled(true)
+        webView.setWebViewClient(object : WebViewClient() {
+            override fun onPageFinished(view: WebView, url: String) {
+                super.onPageFinished(view, url)
+            }
+        })
+    }
+
+    private fun refreshMenu(isFavorite: Boolean) {
+        mOptionsMenu.getItem(0).isVisible = !isFavorite
+        mOptionsMenu.getItem(1).isVisible = isFavorite
+    }
+
+}

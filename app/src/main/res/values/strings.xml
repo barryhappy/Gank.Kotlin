@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Gank.Kotlin</string>
+    <string name="app_main_title">干货集中营 Gank.IO</string>
+    <string name="gank_io_url">http://gank.io/</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_launcher">LauncherActivity</string>
+    <string name="title_activity_html">HtmlActivity</string>
+    <string name="title_activity_history">历史的车轮滚滚向前</string>
+    <string name="title_activity_favorite">我的收藏</string>
+    <string name="title_activity_about">关于</string>
+</resources>
