@@ -1,5 +1,7 @@
 package com.barryzhang.gankkotlin.ui.base
 
+import android.app.Activity
+
 /**
  * barryhappy2010@gmail.com
  * https://github.com/barryhappy
@@ -8,4 +10,5 @@ package com.barryzhang.gankkotlin.ui.base
  */
 interface BaseView<in T>{
     fun setPresenter(presenter : T)
+    fun getActivityInstance(): Activity
 }

@@ -43,7 +43,7 @@ class MainPresenter : MainContract.Presenter {
 
     override fun getRemoteData(day: GankDate) {
 
-        val subscriber = object : SimpleSubscriber<DailyGankEntity>() {
+        val subscriber = object : SimpleSubscriber<DailyGankEntity>(this.v.getActivityInstance()) {
             override fun onNext(t: DailyGankEntity) {
                 val list = ArrayList<Any>()
                 t.category?.forEach {

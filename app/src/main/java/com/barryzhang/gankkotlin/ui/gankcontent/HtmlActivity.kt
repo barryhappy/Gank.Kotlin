@@ -1,5 +1,6 @@
 package com.barryzhang.gankkotlin.ui.gankcontent
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -39,16 +40,14 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
 
     lateinit var mOptionsMenu: Menu
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         GankContentPresenter(this)
         super.onCreate(savedInstanceState)
     }
 
+    override fun getLayoutResourceID(): Int = R.layout.activity_html
 
-    override fun getLayoutResourceID(): Int {
-        return R.layout.activity_html
-    }
+    override fun getActivityInstance(): Activity = this
 
     override fun afterInject() {
 
@@ -60,6 +59,7 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
 
 
     override fun loadGankUrl(url: String?) {
+        showLoadingDialog()
         webView.loadUrl(url)
     }
 
@@ -75,7 +75,7 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
         fab.setImageDrawable(DrawableUtil.buildMaterialDrawable(
                 MaterialDrawableBuilder.with(this)
                         .setIcon(if (isFavorite) MaterialDrawableBuilder.IconValue.STAR
-                                 else MaterialDrawableBuilder.IconValue.STAR_OUTLINE)
+                        else MaterialDrawableBuilder.IconValue.STAR_OUTLINE)
                         .setColor(Color.WHITE)
                         .setSizeDp(20)))
     }
@@ -84,8 +84,9 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
         fab.post({
             val snackBar = Snackbar.make(fab,
                     "如需播放视频，选择『在浏览器中打开』，进行播放",
-                    Snackbar.LENGTH_INDEFINITE).setAction("我知道啦",
-                    { viewCover.visibility = View.GONE })
+                    Snackbar.LENGTH_INDEFINITE).setAction("我知道啦", {
+                        viewCover.visibility = View.GONE
+                    })
                     .setActionTextColor(Color.parseColor("#cccccc"))
             snackBar.view.setBackgroundColor(Color.parseColor("#ff4081"))
             snackBar.show()
@@ -120,6 +121,7 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
         webView.setWebViewClient(object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
+                hideLoadingDialog()
             }
         })
     }

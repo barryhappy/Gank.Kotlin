@@ -1,5 +1,9 @@
 package com.barryzhang.gankkotlin.api
 
+import android.app.Activity
+import android.widget.Toast
+import com.barryzhang.gankkotlin.ext.toast
+import com.barryzhang.gankkotlin.ui.wiget.LoadingDialog
 import rx.Subscriber
 
 /**
@@ -9,38 +13,39 @@ import rx.Subscriber
  * Created by Barry on 16/7/19 22:37.
  */
 
-abstract class SimpleSubscriber<T> : Subscriber<T>(){
+abstract class SimpleSubscriber<T> : Subscriber<T> {
+
+    val act: Activity
+
+    constructor(act: Activity) : super() {
+        this.act = act
+    }
 
     override fun onStart() {
-        if(show()){
-            // TODO 显示进度框
+        if (show()) {
+            LoadingDialog.showDialog(act)
         }
-
     }
+
     override fun onCompleted() {
-        // TODO 隐藏进度框
-        unsubscribe()
+        LoadingDialog.hideDialog()
+        this.unsubscribe()
     }
 
-    override fun onError(e: Throwable?) {
-        // TODO 隐藏进度框
+    override fun onError(e: Throwable) {
         onException(e)
-        unsubscribe()
+        LoadingDialog.hideDialog()
+        act.toast("异常\n: ${e.message}")
+        this.unsubscribe()
     }
 
-    fun show() : Boolean{
-        return shouldShowProgressbar() || getProgressTip() != null
-    }
+    fun show(): Boolean = shouldShowProgressbar() || getProgressTip() != null
 
-    open fun shouldShowProgressbar() : Boolean{
-        return true
-    }
+    open fun shouldShowProgressbar(): Boolean = true
 
-    open fun getProgressTip() :String ? {
-        return null
-    }
+    open fun getProgressTip(): String ? = null
 
-    open fun onException(e : Throwable?){
+    open fun onException(e: Throwable?) {
 
     }
 

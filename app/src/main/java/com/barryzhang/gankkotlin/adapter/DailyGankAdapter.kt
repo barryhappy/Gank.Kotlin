@@ -77,9 +77,9 @@ class DailyGankAdapter(context: Context) : TypePerEntityAdapter<Any>(context) {
         }
 
         override fun onRender(position: Int, data: BeautyData) {
-            textViewDes.text = data.beauty.desc
+            textViewDes.text = data.beauty?.desc
             FrescoImageUtils.loadImageWithWidth(imageViewBeauty,
-                    data.beauty.url,
+                    data.beauty?.url,
                     TViewUtil.sp2px(context, 316f))// 猜猜看这个数字怎么来的？o(╯□╰)o
         }
     }

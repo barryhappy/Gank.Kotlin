@@ -20,7 +20,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".gankcontent.HtmlActivity"
+        <activity android:name=".ui.gankcontent.HtmlActivity"
                   android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.LauncherActivity">
             <intent-filter>

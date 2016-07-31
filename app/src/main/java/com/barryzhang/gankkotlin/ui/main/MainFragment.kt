@@ -1,5 +1,6 @@
 package com.barryzhang.gankkotlin.ui.main
 
+import android.app.Activity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import butterknife.BindView
@@ -27,8 +28,8 @@ class MainFragment: BaseHomeFragment(), MainContract.View {
     lateinit var recyclerView: RecyclerView
 
     companion object {
-        fun newInstance(): com.barryzhang.gankkotlin.ui.MainFragment {
-            return com.barryzhang.gankkotlin.ui.MainFragment()
+        fun newInstance(): com.barryzhang.gankkotlin.ui.main.MainFragment {
+            return com.barryzhang.gankkotlin.ui.main.MainFragment()
         }
     }
 
@@ -62,6 +63,8 @@ class MainFragment: BaseHomeFragment(), MainContract.View {
     override fun setDate(date: String?) {
         mParent.setPageTitle(date)
     }
+
+    override fun getActivityInstance(): Activity = mParent
 
     override fun onDestroy() {
         super.onDestroy()

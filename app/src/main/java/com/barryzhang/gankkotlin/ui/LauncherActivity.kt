@@ -48,6 +48,7 @@ class LauncherActivity : BaseActivity() {
             }
 
             override fun onCompleted() {
+
             }
 
             override fun onError(e: Throwable?) {
