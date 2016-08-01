@@ -57,18 +57,18 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
         this.p.start()
     }
 
+    override fun init(gank: GankItem) {
+        initToolbar(gank)
+        initWebView()
+        fab.post {  onFavoriteChanged(this.p.isFavorite()) }
+        fab.setOnClickListener { this.p.onFavoriteClicked() }
+        this.p.afterViewInit()
+    }
 
     override fun loadGankUrl(url: String?) {
         showLoadingDialog()
         webView.loadUrl(url)
     }
-
-    override fun init(gank: GankItem) {
-        initToolbar(gank)
-        initWebView()
-        this.p.afterViewInit()
-    }
-
     override fun onFavoriteChanged(isFavorite: Boolean) {
         refreshMenu(isFavorite)
 

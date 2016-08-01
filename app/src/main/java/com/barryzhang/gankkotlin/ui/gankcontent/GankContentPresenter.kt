@@ -1,5 +1,6 @@
 package com.barryzhang.gankkotlin.ui.gankcontent
 
+import com.barryzhang.gankkotlin.data.local.DatabaseService
 import com.barryzhang.gankkotlin.entities.GankItem
 
 /**
@@ -18,6 +19,7 @@ class GankContentPresenter : GankContentContract.Presenter {
 
     override fun start() {
         gank = v.getGankData()
+        isNowFavorite = DatabaseService.isFavorite(gank)
         this.v.init(gank)
     }
 
@@ -28,8 +30,18 @@ class GankContentPresenter : GankContentContract.Presenter {
             this.v.showVideoTipCover()
         }else{
             this.v.loadGankUrl(gank.url)
-
         }
+    }
+
+    override fun onFavoriteClicked() {
+        isNowFavorite = !isNowFavorite
+        if (isNowFavorite){
+            DatabaseService.saveFavorite(gank)
+        }else{
+            DatabaseService.deleteFavorite(gank)
+        }
+        val list = DatabaseService.findAllFavorite()// TODO 删除
+        this.v.onFavoriteChanged(isNowFavorite)
     }
 
 }

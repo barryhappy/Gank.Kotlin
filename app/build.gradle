@@ -18,6 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -34,13 +35,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-//    compile 'com.jude:easyrecyclerview:3.5.7'
     compile 'com.github.mzule.easyadapter:easyadapter:1.1.2'
     compile 'com.github.mzule.easyadapter:easyadapterrecycler:1.1.2'
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.jakewharton:butterknife:8.0.1'
     kapt 'com.jakewharton:butterknife-compiler:8.0.1'
-//    compile 'com.google.code.gson:gson:2.5'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
@@ -50,7 +49,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     compile 'net.steamcrafted:materialiconlib:1.0.9'
-//    compile 'com.github.satyan:sugar:1.4'
+    compile 'com.github.satyan:sugar:1.5'
     compile 'us.feras.mdv:markdownview:1.1.0'
 //    compile 'com.androidadvance:topsnackbar:0.0.9'
     compile 'com.barryzhang:temptyview:0.0.1'

@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.orm.SugarApp
 import com.squareup.leakcanary.LeakCanary
 import java.util.*
 
@@ -14,7 +15,7 @@ import java.util.*
  * http://www.barryzhang.com/
  * Created by Barry on 16/7/13 18:54.
  */
-class App : Application() {
+class App : SugarApp() {
     companion object{
         lateinit var instance : App
         val mActivityList : LinkedList<Activity> by lazy { LinkedList<Activity>() }

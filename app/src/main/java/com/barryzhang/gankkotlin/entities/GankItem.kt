@@ -1,14 +1,18 @@
 package com.barryzhang.gankkotlin.entities
 
 
+import com.orm.SugarRecord
+import com.orm.dsl.Table
+import com.orm.dsl.Unique
 import java.io.Serializable
 
 /**
  * Created by Barry on 16/4/20.
  */
-class GankItem : Serializable {
-    private var id: Long? = null
-    var _Id: String? = null
+class GankItem : SugarRecord(), Serializable {
+
+    @Unique
+    var _id: String? = null
     var createdAt: String? = null
     var desc: String? = null
     var publishedAt: String? = null
@@ -18,32 +22,33 @@ class GankItem : Serializable {
     var isUsed: Boolean = false
     var who: String? = null
 
-    fun syncID() {
-        id = Math.abs(hashCode()).toLong()
-    }
+    
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
 
-    fun getId(): Long {
-        return hashCode().toLong()
-    }
+        other as GankItem
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o == null || javaClass != o.javaClass) return false
+        if (_id != other._id) return false
+        if (desc != other.desc) return false
+        if (source != other.source) return false
+        if (type != other.type) return false
+        if (url != other.url) return false
+        if (isUsed != other.isUsed) return false
+        if (who != other.who) return false
 
-        val gankItem = o as GankItem?
-
-        if (if (desc != null) desc != gankItem!!.desc else gankItem!!.desc != null) return false
-        if (if (type != null) type != gankItem.type else gankItem.type != null) return false
-        if (if (url != null) url != gankItem.url else gankItem.url != null) return false
-        return if (who != null) who == gankItem.who else gankItem.who == null
-
+        return true
     }
 
     override fun hashCode(): Int {
-        var result = if (desc != null) desc!!.hashCode() else 0
-        result = 31 * result + if (type != null) type!!.hashCode() else 0
-        result = 31 * result + if (url != null) url!!.hashCode() else 0
-        result = 31 * result + if (who != null) who!!.hashCode() else 0
+        var result = _id?.hashCode() ?: 0
+        result = 31 * result + (desc?.hashCode() ?: 0)
+        result = 31 * result + (source?.hashCode() ?: 0)
+        result = 31 * result + (type?.hashCode() ?: 0)
+        result = 31 * result + (url?.hashCode() ?: 0)
+        result = 31 * result + isUsed.hashCode()
+        result = 31 * result + (who?.hashCode() ?: 0)
         return result
     }
+
 }

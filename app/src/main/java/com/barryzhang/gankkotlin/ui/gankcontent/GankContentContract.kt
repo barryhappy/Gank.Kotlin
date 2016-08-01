@@ -23,6 +23,7 @@ interface GankContentContract {
     abstract class Presenter : BasePresenter() {
         abstract fun isFavorite () : Boolean
         abstract fun afterViewInit()
+        abstract fun onFavoriteClicked()
     }
 
 }
