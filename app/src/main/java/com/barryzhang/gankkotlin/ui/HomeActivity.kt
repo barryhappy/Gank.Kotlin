@@ -15,6 +15,8 @@ import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.data.MainRepository
 import com.barryzhang.gankkotlin.ui.base.BaseActivity
 import com.barryzhang.gankkotlin.ui.base.BaseFragment
+import com.barryzhang.gankkotlin.ui.favorite.FavoriteFragment
+import com.barryzhang.gankkotlin.ui.favorite.FavoritePresenter
 import com.barryzhang.gankkotlin.ui.history.HistoryFragment
 import com.barryzhang.gankkotlin.ui.history.HistoryPresenter
 import com.barryzhang.gankkotlin.ui.main.MainFragment
@@ -63,6 +65,7 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
         when(item?.itemId){
             R.id.nav_home -> showFragment(0)
             R.id.nav_history -> showFragment(1)
+            R.id.nav_favorite -> showFragment(2)
         }
         drawerLayout.closeDrawers()
         return true
@@ -92,6 +95,7 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
             when(index) {
                 0 -> MainPresenter(MainRepository.instance, fragmentList.get(index) as MainFragment)
                 1 ->  HistoryPresenter(fragmentList.get(index) as HistoryFragment)
+                2 -> FavoritePresenter(fragmentList.get(index) as FavoriteFragment)
             }
         }
     }
@@ -99,6 +103,7 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
     fun newFragmentByIndex(index : Int ) : BaseFragment<HomeActivity> = when(index){
         0 -> MainFragment.newInstance()
         1 -> HistoryFragment.newInstance()
+        2-> FavoriteFragment.newInstance()
         else -> MainFragment.newInstance()
     }
 
