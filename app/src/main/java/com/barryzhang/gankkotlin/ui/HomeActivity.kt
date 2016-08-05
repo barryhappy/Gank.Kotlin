@@ -1,5 +1,6 @@
 package com.barryzhang.gankkotlin.ui
 
+import android.graphics.Color
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -21,6 +22,9 @@ import com.barryzhang.gankkotlin.ui.history.HistoryFragment
 import com.barryzhang.gankkotlin.ui.history.HistoryPresenter
 import com.barryzhang.gankkotlin.ui.main.MainFragment
 import com.barryzhang.gankkotlin.ui.main.MainPresenter
+import com.barryzhang.gankkotlin.utils.DrawableUtil
+import com.barryzhang.gankkotlin.utils.openUrlWithBrowser
+import net.steamcrafted.materialiconlib.MaterialDrawableBuilder
 
 /**
  * barryhappy2010@gmail.com
@@ -29,6 +33,8 @@ import com.barryzhang.gankkotlin.ui.main.MainPresenter
  * Created by Barry on 16/7/15
  */
 class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedListener {
+
+    val GITHUB_URL = "https://github.com/barryhappy/Gank.Kotlin"
 
     val mLayoutContent : FrameLayout by lazy { findViewById(R.id.mLayoutContent) as FrameLayout };
     val toolbar : Toolbar by lazy { findViewById(R.id.toolbar) as Toolbar }
@@ -43,10 +49,13 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
 
     override fun afterInject() {
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { view -> Snackbar.make(view,"Hello, This is from SnackBar", Snackbar.LENGTH_LONG)
-                .setAction("OK",null)
-                .show()
-        }
+        fab.setImageDrawable(DrawableUtil.buildMaterialDrawable(
+                MaterialDrawableBuilder.with(this)
+                        .setIcon(  MaterialDrawableBuilder.IconValue.GITHUB_CIRCLE )
+                        .setColor(Color.WHITE)
+                        .setSizeDp(20)))
+        fab.setOnClickListener { openUrlWithBrowser(this,GITHUB_URL) }
+
         val actionBarToggle =  ActionBarDrawerToggle(this,drawerLayout,toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.setDrawerListener(actionBarToggle)
