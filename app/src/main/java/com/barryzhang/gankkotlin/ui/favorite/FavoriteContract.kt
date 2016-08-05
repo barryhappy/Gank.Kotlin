@@ -4,6 +4,7 @@ import com.barryzhang.gankkotlin.ui.base.BasePresenter
 import com.barryzhang.gankkotlin.ui.base.BaseView
 import com.barryzhang.gankkotlin.entities.DailyGankEntity
 import com.barryzhang.gankkotlin.entities.GankDate
+import com.barryzhang.gankkotlin.ui.gankcontent.GankContentPresenter
 
 /**
  * barryhappy2010@gmail.com
@@ -21,6 +22,7 @@ interface FavoriteContract {
     abstract class Presenter : BasePresenter() {
         abstract fun getRemoteData( )
         abstract fun getTitle( )
+        abstract fun onFavoriteChange(e:GankContentPresenter.OnFavoriteChangeEvent)
     }
 
 }

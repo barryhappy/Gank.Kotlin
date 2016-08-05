@@ -24,6 +24,7 @@ interface GankContentContract {
         abstract fun isFavorite () : Boolean
         abstract fun afterViewInit()
         abstract fun onFavoriteClicked()
+        abstract fun onOptionsItemSelected(menuItem : Int)
     }
 
 }

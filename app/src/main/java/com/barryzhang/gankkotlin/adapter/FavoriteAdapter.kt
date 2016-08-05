@@ -1,5 +1,6 @@
 package com.barryzhang.gankkotlin.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.text.Html
 import android.widget.TextView
@@ -12,12 +13,15 @@ import com.github.mzule.easyadapter.ViewType
 
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
+import com.barryzhang.gankkotlin.ext.startPage
+import com.barryzhang.gankkotlin.ui.gankcontent.HtmlActivity
 
 /**
  * https://github.com/barryhappy
  * Created by Barry on 16/8/3
  */
-class FavoriteAdapter(context: Context) : TypePerEntityAdapter<Any>(context), PinnedSectionListView.PinnedSectionListAdapter {
+class FavoriteAdapter(context: Context) : TypePerEntityAdapter<Any>(context) {
 
     override fun mapEntityViewTypes() {
 
@@ -29,6 +33,7 @@ class FavoriteAdapter(context: Context) : TypePerEntityAdapter<Any>(context), Pi
     class FavoriteViewType : ViewType<GankItem>() {
         @BindView(R.id.textViewDesc)
         lateinit var textViewDesc: TextView
+        lateinit var data: GankItem
 
         override fun onCreate() {
             setContentView(R.layout.lv_item_gank_item)
@@ -36,13 +41,16 @@ class FavoriteAdapter(context: Context) : TypePerEntityAdapter<Any>(context), Pi
         }
 
         override fun onRender(position: Int, data: GankItem) {
-
+            this.data = data
             textViewDesc.text = Html.fromHtml(data.desc +
                     "<font color='#222'>（" + data.who + "）</font>")
         }
-    }
 
-    override fun isItemViewTypePinned(viewType: Int): Boolean {
-        return getRawViewType(DailyGankAdapter.TitleViewType::class.java) == viewType
+        @OnClick(R.id.textViewDesc)
+        fun onContentClick(){
+            if(context is Activity){
+                (context as Activity) .startPage<HtmlActivity>("gankItem" to data)
+            }
+        }
     }
 }

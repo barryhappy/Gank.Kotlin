@@ -27,3 +27,7 @@ fun Any.unregisterEventBus(){
 fun Any.postBusEvent(event : Any){
     EventBus.getDefault().post(event)
 }
+
+fun Any.postStickyBusEvent(event : Any){
+    EventBus.getDefault().postSticky(event)
+}

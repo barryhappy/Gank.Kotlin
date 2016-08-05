@@ -11,10 +11,12 @@ class DatabaseService {
     companion object {
         fun saveFavorite(bean: GankItem): Long = bean.save()
 
-        fun deleteFavorite(bean: GankItem): Boolean = bean.delete()
+        fun deleteFavorite(bean: GankItem): Boolean {
+            return SugarRecord.deleteAll(GankItem::class.java,"_id = ?", bean._id) > 0
+        }
 
         fun findAllFavorite(): List<GankItem> {
-            return SugarRecord.listAll(GankItem::class.java)
+            return SugarRecord.listAll(GankItem::class.java, "id DESC")
         }
 
         fun isFavorite(bean: GankItem): Boolean {

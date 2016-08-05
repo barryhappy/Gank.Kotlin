@@ -1,6 +1,7 @@
 package com.barryzhang.gankkotlin.ui.favorite
 
 import com.barryzhang.gankkotlin.data.local.DatabaseService
+import com.barryzhang.gankkotlin.ui.gankcontent.GankContentPresenter
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -31,6 +32,10 @@ class FavoritePresenter : FavoriteContract.Presenter {
 
     override fun start() {
         getTitle()
+        getRemoteData()
+    }
+
+    override fun onFavoriteChange(e: GankContentPresenter.OnFavoriteChangeEvent) {
         getRemoteData()
     }
 

@@ -6,6 +6,8 @@ import butterknife.BindView
 import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.adapter.FavoriteAdapter
 import com.barryzhang.gankkotlin.ui.base.BaseHomeFragment
+import com.barryzhang.gankkotlin.ui.gankcontent.GankContentPresenter
+import org.greenrobot.eventbus.EventBus
 
 /**
  * https://github.com/barryhappy
@@ -48,5 +50,13 @@ class FavoriteFragment : BaseHomeFragment(), FavoriteContract.View {
         this.p = presenter
     }
 
+    override fun onResume() {
+        super.onResume()
+        val stickyEvent = EventBus.getDefault().getStickyEvent(GankContentPresenter.OnFavoriteChangeEvent::class.java)
+        if (stickyEvent != null){
+            this.p.onFavoriteChange(stickyEvent)
+            EventBus.getDefault().removeStickyEvent(GankContentPresenter.OnFavoriteChangeEvent::class.java)
+        }
+    }
 
 }
