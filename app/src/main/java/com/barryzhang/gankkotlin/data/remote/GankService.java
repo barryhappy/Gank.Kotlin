@@ -1,4 +1,4 @@
-package com.barryzhang.gankkotlin.api;
+package com.barryzhang.gankkotlin.data.remote;
 
 import com.barryzhang.gankkotlin.entities.DailyGankEntity;
 import com.barryzhang.gankkotlin.entities.DayContent;

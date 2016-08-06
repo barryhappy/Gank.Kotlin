@@ -1,4 +1,4 @@
-package com.barryzhang.gankkotlin.api
+package com.barryzhang.gankkotlin.data.remote
 
 import android.app.Activity
 import android.widget.Toast

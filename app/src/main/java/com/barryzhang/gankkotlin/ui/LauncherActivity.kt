@@ -2,7 +2,7 @@ package com.barryzhang.gankkotlin.ui
 
 import butterknife.BindView
 import com.barryzhang.gankkotlin.R
-import com.barryzhang.gankkotlin.api.GankAPI
+import com.barryzhang.gankkotlin.data.remote.GankAPI
 import com.barryzhang.gankkotlin.data.local.ShareService
 import com.barryzhang.gankkotlin.entities.History
 import com.barryzhang.gankkotlin.ext.startPage

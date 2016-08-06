@@ -1,6 +1,6 @@
 package com.barryzhang.gankkotlin.data
 
-import com.barryzhang.gankkotlin.api.GankAPI
+import com.barryzhang.gankkotlin.data.remote.GankAPI
 import com.barryzhang.gankkotlin.entities.DailyGankEntity
 import com.barryzhang.gankkotlin.entities.DayContent
 import com.barryzhang.gankkotlin.entities.GankDate

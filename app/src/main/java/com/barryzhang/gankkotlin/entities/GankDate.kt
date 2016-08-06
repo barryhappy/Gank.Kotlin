@@ -62,18 +62,3 @@ class GankDate {
     }
 
 }
-
-
-fun main(args: Array<String>) {
-    var date1 = GankDate();
-
-    println(date1)
-
-    var ss = "2016-07-12T03:03:40s"
-
-    val split = ss.split("T")
-    println(split)
-
-    val date2 = GankDate(ss)
-    println(date2)
-}

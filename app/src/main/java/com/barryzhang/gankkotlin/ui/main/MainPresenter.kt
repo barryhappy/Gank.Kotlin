@@ -1,6 +1,6 @@
 package com.barryzhang.gankkotlin.ui.main
 
-import com.barryzhang.gankkotlin.api.SimpleSubscriber
+import com.barryzhang.gankkotlin.data.remote.SimpleSubscriber
 import com.barryzhang.gankkotlin.data.MainRepository
 import com.barryzhang.gankkotlin.entities.BeautyData
 import com.barryzhang.gankkotlin.entities.DailyGankEntity

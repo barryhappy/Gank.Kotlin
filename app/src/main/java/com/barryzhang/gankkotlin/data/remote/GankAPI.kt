@@ -1,4 +1,4 @@
-package com.barryzhang.gankkotlin.api
+package com.barryzhang.gankkotlin.data.remote
 
 import com.barryzhang.gankkotlin.BuildConfig
 import com.barryzhang.gankkotlin.entities.*
@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit
  */
 
 class GankAPI {
-    lateinit var retrofit: Retrofit;
-    lateinit var service: GankService;
+    lateinit var retrofit: Retrofit
+    lateinit var service: com.barryzhang.gankkotlin.data.remote.GankService;
 
     constructor() {
         val httpClientBuilder = OkHttpClient.Builder();
@@ -44,7 +44,7 @@ class GankAPI {
                 .baseUrl(BASE_URL)
                 .build()
 
-        service = retrofit.create(GankService::class.java)
+        service = retrofit.create(com.barryzhang.gankkotlin.data.remote.GankService::class.java)
     }
 
     companion object {
@@ -93,7 +93,7 @@ class GankAPI {
 
 
     fun <T : BaseHttpResponseEntity<*>> makeSubscribe(
-            observable: Observable<T> ,subscriber: Observer<T> ) {
+            observable: Observable<T>, subscriber: Observer<T>) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -104,7 +104,7 @@ class GankAPI {
                 .subscribe(subscriber)
     }
 
-    fun getDayContent(day:GankDate): Observable<DayContent> {
+    fun getDayContent(day: GankDate): Observable<DayContent> {
         return service.contentDay(day.year, day.month, day.day)
     }
 
@@ -116,7 +116,7 @@ class GankAPI {
         return service.history() ;
     }
 
-    fun getDailyGankEntity(day: GankDate) : Observable<DailyGankEntity>{
+    fun getDailyGankEntity(day: GankDate) : Observable<DailyGankEntity> {
         return service.dayByYearMonthDay(day.year, day.month, day.day)
     }
 
