@@ -2,6 +2,7 @@ package com.barryzhang.gankkotlin.ext
 
 import android.app.Activity
 import android.app.Fragment
+import android.os.Build
 import android.widget.Toast
 
 /**
@@ -17,5 +18,9 @@ fun Activity.toast(msg: String?) {
 fun Fragment.toast(msg: String?) {
     Toast.makeText(this.activity, msg, Toast.LENGTH_SHORT).show()
 }
+
+fun Activity.getResColor(colorId: Int) =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) this.getColor(colorId)
+        else this.resources.getColor(colorId)
 
 

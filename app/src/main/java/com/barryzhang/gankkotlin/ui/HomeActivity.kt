@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.widget.FrameLayout
 import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.data.MainRepository
+import com.barryzhang.gankkotlin.ext.getResColor
 import com.barryzhang.gankkotlin.ui.base.BaseActivity
 import com.barryzhang.gankkotlin.ui.base.BaseFragment
 import com.barryzhang.gankkotlin.ui.favorite.FavoriteFragment
@@ -36,7 +37,6 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
 
     val GITHUB_URL = "https://github.com/barryhappy/Gank.Kotlin"
 
-    val mLayoutContent : FrameLayout by lazy { findViewById(R.id.mLayoutContent) as FrameLayout };
     val toolbar : Toolbar by lazy { findViewById(R.id.toolbar) as Toolbar }
     val fab : FloatingActionButton by lazy { findViewById(R.id.fab) as FloatingActionButton }
     val drawerLayout by lazy { findViewById(R.id.drawer_layout) as DrawerLayout }
@@ -45,23 +45,27 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
     val fragmentList = SparseArray<BaseFragment<HomeActivity>>()
     val fragmentListStatus = SparseBooleanArray()
 
-    override fun getLayoutResourceID(): Int { return R.layout.activity_base_home}
+    override fun getLayoutResourceID(): Int = R.layout.activity_base_home
 
     override fun afterInject() {
-        setSupportActionBar(toolbar)
         fab.setImageDrawable(DrawableUtil.buildMaterialDrawable(
                 MaterialDrawableBuilder.with(this)
-                        .setIcon(  MaterialDrawableBuilder.IconValue.GITHUB_CIRCLE )
+                        .setIcon( MaterialDrawableBuilder.IconValue.GITHUB_CIRCLE )
                         .setColor(Color.WHITE)
                         .setSizeDp(20)))
         fab.setOnClickListener { openUrlWithBrowser(this,GITHUB_URL) }
 
+        setSupportActionBar(toolbar)
         val actionBarToggle =  ActionBarDrawerToggle(this,drawerLayout,toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.setDrawerListener(actionBarToggle)
+        drawerLayout.addDrawerListener(actionBarToggle)
         drawerLayout.closeDrawers()
         actionBarToggle.syncState()
 
+        setMenuIcon(R.id.nav_home,MaterialDrawableBuilder.IconValue.HOME )
+        setMenuIcon(R.id.nav_history,MaterialDrawableBuilder.IconValue.HISTORY )
+        setMenuIcon(R.id.nav_favorite,MaterialDrawableBuilder.IconValue.STAR )
+        setMenuIcon(R.id.nav_about,MaterialDrawableBuilder.IconValue.INFORMATION )
         navigationView.setNavigationItemSelectedListener(this)
 
     }
@@ -127,5 +131,12 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
             super.onBackPressed()
         }
 
+    }
+
+    private fun setMenuIcon(menuId : Int, icon: MaterialDrawableBuilder.IconValue){
+        navigationView.menu.findItem(menuId).icon =  DrawableUtil.buildMaterialDrawable(
+                MaterialDrawableBuilder.with(this)
+                        .setColor(getResColor(R.color.menu_icon))
+                        .setIcon(icon))
     }
 }
