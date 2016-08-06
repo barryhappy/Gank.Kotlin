@@ -3,6 +3,7 @@ package com.barryzhang.gankkotlin.adapter
 import android.app.Activity
 import android.content.Context
 import android.text.Html
+import android.view.View
 import android.widget.TextView
 
 import com.barryzhang.gankkotlin.R
@@ -31,6 +32,8 @@ class FavoriteAdapter(context: Context) : TypePerEntityAdapter<Any>(context) {
 
 
     class FavoriteViewType : ViewType<GankItem>() {
+        @BindView(R.id.rootView)
+        lateinit var rootView : View
         @BindView(R.id.textViewDesc)
         lateinit var textViewDesc: TextView
         lateinit var data: GankItem
@@ -46,7 +49,7 @@ class FavoriteAdapter(context: Context) : TypePerEntityAdapter<Any>(context) {
                     "<font color='#222'>（" + data.who + "）</font>")
         }
 
-        @OnClick(R.id.textViewDesc)
+        @OnClick(R.id.rootView)
         fun onContentClick(){
             if(context is Activity){
                 (context as Activity) .startPage<HtmlActivity>("gankItem" to data)
