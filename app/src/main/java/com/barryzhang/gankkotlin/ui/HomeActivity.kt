@@ -37,6 +37,8 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
 
     val GITHUB_URL = "https://github.com/barryhappy/Gank.Kotlin"
 
+    var currentFragmentIndex = 0
+
     val toolbar : Toolbar by lazy { findViewById(R.id.toolbar) as Toolbar }
     val fab : FloatingActionButton by lazy { findViewById(R.id.fab) as FloatingActionButton }
     val drawerLayout by lazy { findViewById(R.id.drawer_layout) as DrawerLayout }
@@ -111,6 +113,8 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
                 2 -> FavoritePresenter(fragmentList.get(index) as FavoriteFragment)
             }
         }
+
+        currentFragmentIndex = index
     }
 
     fun newFragmentByIndex(index : Int ) : BaseFragment<HomeActivity> = when(index){
@@ -127,7 +131,9 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
     override fun onBackPressed() {
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawers()
-        }else {
+        } else if(currentFragmentIndex != 0){
+            showFragment(0)
+        } else {
             super.onBackPressed()
         }
 
