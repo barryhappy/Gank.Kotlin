@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.barryzhang.gankio.ui.AboutActivity"
+    tools:context="com.barryzhang.gankkotlin.ui.AboutActivity"
     tools:showIn="@layout/activity_about">
 
     <us.feras.mdv.MarkdownView

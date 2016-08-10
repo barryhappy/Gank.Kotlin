@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.barryzhang.gankkotlin.ui.base.BaseHomeActivity"
+    tools:context="com.barryzhang.gankkotlin.ui.HomeActivity"
     tools:showIn="@layout/activity_base_home">
 
 

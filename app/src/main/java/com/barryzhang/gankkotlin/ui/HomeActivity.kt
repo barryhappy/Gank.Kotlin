@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.data.MainRepository
 import com.barryzhang.gankkotlin.ext.getResColor
+import com.barryzhang.gankkotlin.ext.startPage
 import com.barryzhang.gankkotlin.ui.base.BaseActivity
 import com.barryzhang.gankkotlin.ui.base.BaseFragment
 import com.barryzhang.gankkotlin.ui.favorite.FavoriteFragment
@@ -81,6 +82,7 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
             R.id.nav_home -> showFragment(0)
             R.id.nav_history -> showFragment(1)
             R.id.nav_favorite -> showFragment(2)
+            R.id.nav_about -> startPage<AboutActivity>()
         }
         drawerLayout.closeDrawers()
         return true
