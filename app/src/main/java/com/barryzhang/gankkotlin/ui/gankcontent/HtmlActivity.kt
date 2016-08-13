@@ -17,6 +17,7 @@ import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.entities.GankItem
 import com.barryzhang.gankkotlin.ext.toast
 import com.barryzhang.gankkotlin.ui.base.BaseActivity
+import com.barryzhang.gankkotlin.ui.base.BaseAppBarActivity
 import com.barryzhang.gankkotlin.utils.DrawableUtil
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder
 
@@ -25,7 +26,7 @@ import net.steamcrafted.materialiconlib.MaterialDrawableBuilder
  * Created by Barry on 16/7/28
  */
 
-class HtmlActivity : BaseActivity(), GankContentContract.View {
+class HtmlActivity : BaseAppBarActivity(), GankContentContract.View {
     lateinit var p: GankContentContract.Presenter
     override fun setPresenter(presenter: GankContentContract.Presenter) {
         this.p = presenter
@@ -33,10 +34,6 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
 
     @BindView(R.id.webView)
     lateinit var webView: WebView
-    @BindView(R.id.fab)
-    lateinit var fab: FloatingActionButton
-    @BindView(R.id.toolbar)
-    lateinit var toolbar: Toolbar
     @BindView(R.id.viewCover)
     lateinit var viewCover: View
 
@@ -47,7 +44,7 @@ class HtmlActivity : BaseActivity(), GankContentContract.View {
         super.onCreate(savedInstanceState)
     }
 
-    override fun getLayoutResourceID(): Int = R.layout.activity_html
+    override fun getLayoutResourceID(): Int = R.layout.content_html
 
     override fun getActivityInstance(): Activity = this
 

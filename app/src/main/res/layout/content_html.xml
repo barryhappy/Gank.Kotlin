@@ -9,7 +9,6 @@
     tools:context="com.barryzhang.gankkotlin.ui.gankcontent.HtmlActivity"
     tools:showIn="@layout/app_bar_main">
 
-
     <WebView
         android:id="@+id/webView"
         android:layout_width="wrap_content"
