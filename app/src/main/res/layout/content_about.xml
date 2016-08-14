@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<WebView
+    android:id="@+id/webView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.barryzhang.gankkotlin.ui.AboutActivity"
-    tools:showIn="@layout/activity_about">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <us.feras.mdv.MarkdownView
-        android:id="@+id/markDownView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </us.feras.mdv.MarkdownView>
-</android.support.v4.widget.NestedScrollView>
+</WebView>

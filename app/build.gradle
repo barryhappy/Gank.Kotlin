@@ -50,8 +50,6 @@ dependencies {
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     compile 'net.steamcrafted:materialiconlib:1.0.9'
     compile 'com.github.satyan:sugar:1.5'
-    compile 'us.feras.mdv:markdownview:1.1.0'
-//    compile 'com.androidadvance:topsnackbar:0.0.9'
     compile 'com.barryzhang:temptyview:0.0.1'
 
     compile 'org.greenrobot:eventbus:3.0.0'
