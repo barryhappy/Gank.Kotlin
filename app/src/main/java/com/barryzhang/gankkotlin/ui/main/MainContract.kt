@@ -17,6 +17,7 @@ interface MainContract{
         fun showList(list: List<Any>)
         fun setTitle(title: String?)
         fun setDate(date: String?)
+        fun showRetryDialog()
     }
 
     abstract class Presenter : BasePresenter(){

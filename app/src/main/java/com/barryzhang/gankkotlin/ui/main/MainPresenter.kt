@@ -64,6 +64,11 @@ class MainPresenter : MainContract.Presenter {
                 v.showList(list)
             }
 
+            override fun onException(e: Throwable?) {
+                super.onException(e)
+                v.showRetryDialog()
+            }
+
         }
         subscriberList.add(subscriber)
         m.getDailyGankEntity(day, subscriber)
