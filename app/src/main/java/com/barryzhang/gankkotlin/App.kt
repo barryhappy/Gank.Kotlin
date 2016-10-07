@@ -2,11 +2,15 @@ package com.barryzhang.gankkotlin
 
 import android.app.Activity
 import android.app.Application
+import android.app.Application.ActivityLifecycleCallbacks
 import android.content.Context
+import android.os.Bundle
+import com.barryzhang.gankkotlin.ext.d
 
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.orm.SugarApp
 import com.squareup.leakcanary.LeakCanary
+import java.lang.ref.WeakReference
 import java.util.*
 
 /**
@@ -18,7 +22,6 @@ import java.util.*
 class App : SugarApp() {
     companion object{
         lateinit var instance : App
-        val mActivityList : LinkedList<Activity> by lazy { LinkedList<Activity>() }
     }
 
     override fun onCreate() {
@@ -26,15 +29,31 @@ class App : SugarApp() {
         instance = this
         LeakCanary.install(this)
         Fresco.initialize(this)
-    }
 
-    fun addActivity(act : Activity){
-        mActivityList.add(act)
-    }
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks{
+            override fun onActivityPaused(activity: Activity?) {
+            }
 
-    fun removeActivity(act: Activity){
-        mActivityList.remove(act)
-    }
+            override fun onActivityStarted(activity: Activity) {
+                d("======= onActivityStarted : ${activity.localClassName}")
+            }
 
-    fun getTopActivity() : Activity = mActivityList.last
+            override fun onActivityDestroyed(activity: Activity) {
+                d("======= onActivityDestroyed : ${activity.localClassName}")
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+            }
+
+            override fun onActivityStopped(activity: Activity?) {
+            }
+
+            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            }
+
+            override fun onActivityResumed(activity: Activity?) {
+            }
+
+        })
+    }
 }

@@ -3,7 +3,6 @@ package com.barryzhang.gankkotlin.ui.base
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import butterknife.ButterKnife
-import com.barryzhang.gankkotlin.App
 import com.barryzhang.gankkotlin.ui.wiget.LoadingDialog
 import rx.Subscriber
 import java.util.*
@@ -15,15 +14,13 @@ import java.util.*
 
 abstract class BaseActivity : AppCompatActivity(){
 
-    val isDebug = false
+    val isDebug = true
     var mLoadingDialog : LoadingDialog? = null
 
     val subscriberList: ArrayList<Subscriber<*>> by lazy { ArrayList<Subscriber<*>>()}
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-
-        App.instance.addActivity(this)
 
         setContentView(getLayoutResourceID())
         ButterKnife.bind(this)
@@ -36,7 +33,6 @@ abstract class BaseActivity : AppCompatActivity(){
 
     override fun onDestroy() {
         subscriberList.forEach { it.unsubscribe() }
-        App.instance.removeActivity(this)
         super.onDestroy()
     }
 

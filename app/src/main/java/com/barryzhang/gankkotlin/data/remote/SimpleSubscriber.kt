@@ -3,6 +3,7 @@ package com.barryzhang.gankkotlin.data.remote
 import android.app.Activity
 import android.widget.Toast
 import com.barryzhang.gankkotlin.ext.toast
+import com.barryzhang.gankkotlin.ui.base.BaseActivity
 import com.barryzhang.gankkotlin.ui.wiget.LoadingDialog
 import rx.Subscriber
 
@@ -15,27 +16,30 @@ import rx.Subscriber
 
 abstract class SimpleSubscriber<T> : Subscriber<T> {
 
-    val act: Activity
+    var act: BaseActivity? = null
+    var dialog : LoadingDialog? = null
 
     constructor(act: Activity) : super() {
-        this.act = act
+        if(act is BaseActivity) {
+            this.act = act
+        }
     }
 
     override fun onStart() {
         if (show()) {
-            LoadingDialog.showDialog(act)
+            act?.showLoadingDialog()
         }
     }
 
     override fun onCompleted() {
-        LoadingDialog.hideDialog()
+        act?.hideLoadingDialog()
         this.unsubscribe()
     }
 
     override fun onError(e: Throwable) {
         onException(e)
-        LoadingDialog.hideDialog()
-        act.toast("异常\n: ${e.message}")
+        act?.hideLoadingDialog()
+        act?.toast("异常\n: ${e.message}")
         this.unsubscribe()
     }
 

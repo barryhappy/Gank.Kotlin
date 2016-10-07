@@ -2,6 +2,7 @@ package com.barryzhang.gankkotlin.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.support.v7.widget.CardView
 import android.text.Html
 import android.widget.TextView
 import butterknife.BindView
@@ -12,7 +13,7 @@ import com.barryzhang.gankkotlin.entities.BeautyData
 import com.barryzhang.gankkotlin.entities.GankItem
 import com.barryzhang.gankkotlin.ext.startPage
 import com.barryzhang.gankkotlin.ui.gankcontent.HtmlActivity
-import com.barryzhang.gankkotlin.utils.FrescoImageUtils
+import com.barryzhang.gankkotlin.utils.loadImageWithWidth
 import com.barryzhang.temptyview.TViewUtil
 import com.facebook.drawee.view.SimpleDraweeView
 import com.github.mzule.easyadapter.ViewType
@@ -70,6 +71,10 @@ class DailyGankAdapter(context: Context) : TypePerEntityAdapter<Any>(context) {
         lateinit var imageViewBeauty: SimpleDraweeView
         @BindView(R.id.textViewDes)
         lateinit var textViewDes: TextView
+        @BindView(R.id.cardView)
+        lateinit var cardView : CardView
+
+        lateinit var data:BeautyData
 
         override fun onCreate() {
             setContentView(R.layout.lv_item_beautiful)
@@ -77,10 +82,20 @@ class DailyGankAdapter(context: Context) : TypePerEntityAdapter<Any>(context) {
         }
 
         override fun onRender(position: Int, data: BeautyData) {
+            this.data = data
             textViewDes.text = data.beauty?.desc
-            FrescoImageUtils.loadImageWithWidth(imageViewBeauty,
+            loadImageWithWidth(imageViewBeauty,
                     data.beauty?.url,
                     TViewUtil.sp2px(context, 316f))// 猜猜看这个数字怎么来的？o(╯□╰)o
+        }
+
+        @OnClick(R.id.imageViewBeauty)
+        fun onImageClick(){
+//            Observable.create<Unit> { DrawableUtil.save(context,Uri.parse(data.beauty?.url)) }
+//                    .subscribeOn(AndroidSchedulers.mainThread())
+//                    .observeOn(Schedulers.io())
+//                    .subscribe { context.toast("保存到相册啦~") }
+
         }
     }
 }

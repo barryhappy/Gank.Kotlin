@@ -18,12 +18,6 @@ class MainRepository{
 
     companion object{
         var instance  = MainRepository()
-//        var instance : MainRepository? = null
-//            get() {
-//                if(this == null){
-//
-//                }
-//            }
     }
 
     fun getDailyGankEntity(day: GankDate,

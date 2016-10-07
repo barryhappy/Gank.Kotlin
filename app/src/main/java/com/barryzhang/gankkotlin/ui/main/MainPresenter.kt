@@ -37,6 +37,7 @@ class MainPresenter : MainContract.Presenter {
 
     @Subscribe
     fun onNewDateSelectEvent(date : GankDate){
+        v.setDate(date)
         getRemoteData(date)
         getTitle(date)
     }
@@ -76,13 +77,6 @@ class MainPresenter : MainContract.Presenter {
 
     override fun getTitle(day: GankDate) {
         v.setTitle("首页 ${day.toMD()}" )
-
-//        val subscriber : Subscriber<DayContent> = object : SimpleSubscriber<DayContent> (){
-//            override fun onNext(t: DayContent) {
-//                v.setTitle(t.results?.first()?.title)
-//            }
-//        }
-//        m.getDayContent(day,subscriber)
     }
 
     override fun release() {

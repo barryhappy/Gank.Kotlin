@@ -3,7 +3,6 @@ package com.barryzhang.gankkotlin.ui
 import android.graphics.Color
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
@@ -11,7 +10,6 @@ import android.support.v7.widget.Toolbar
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.view.MenuItem
-import android.widget.FrameLayout
 import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.data.MainRepository
 import com.barryzhang.gankkotlin.ext.getResColor

@@ -1,5 +1,6 @@
 package com.barryzhang.gankkotlin.ext
 
+import android.util.Log
 import com.google.gson.Gson
 import org.greenrobot.eventbus.EventBus
 
@@ -30,4 +31,8 @@ fun Any.postBusEvent(event : Any){
 
 fun Any.postStickyBusEvent(event : Any){
     EventBus.getDefault().postSticky(event)
+}
+
+fun Any.d(msg : String ?){
+    Log.d(this.toString(),msg)
 }

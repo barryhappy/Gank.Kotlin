@@ -16,7 +16,7 @@ interface MainContract{
     interface View : BaseView<Presenter> {
         fun showList(list: List<Any>)
         fun setTitle(title: String?)
-        fun setDate(date: String?)
+        fun setDate(date: GankDate)
         fun showRetryDialog()
     }
 

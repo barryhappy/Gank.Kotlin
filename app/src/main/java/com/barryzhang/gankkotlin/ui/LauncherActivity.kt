@@ -2,11 +2,10 @@ package com.barryzhang.gankkotlin.ui
 
 import butterknife.BindView
 import com.barryzhang.gankkotlin.R
-import com.barryzhang.gankkotlin.data.remote.GankAPI
 import com.barryzhang.gankkotlin.data.local.ShareService
+import com.barryzhang.gankkotlin.data.remote.GankAPI
 import com.barryzhang.gankkotlin.entities.History
 import com.barryzhang.gankkotlin.ext.startPage
-import com.barryzhang.gankkotlin.ui.HomeActivity
 import com.barryzhang.gankkotlin.ui.base.BaseActivity
 import com.facebook.drawee.view.SimpleDraweeView
 import com.google.gson.Gson

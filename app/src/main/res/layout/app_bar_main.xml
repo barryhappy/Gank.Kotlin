@@ -24,8 +24,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main"  />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -35,15 +33,6 @@
         android:visibility="gone"
         android:src="@android:drawable/ic_dialog_info" />
 
-
-    <net.steamcrafted.materialiconlib.MaterialIconView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:materialIcon="clipboard_arrow_down"
-        app:materialIconColor="#fff"
-        app:materialIconSize="24dp"
-        android:scaleType="center"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/icon"/>
+    <include layout="@layout/content_main"  />
 
 </android.support.design.widget.CoordinatorLayout>

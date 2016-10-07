@@ -2,10 +2,8 @@ package com.barryzhang.gankkotlin.ui.main
 
 import android.app.Activity
 import android.content.DialogInterface
-import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.RelativeLayout
 import butterknife.BindView
 import com.barryzhang.gankkotlin.R
 import com.barryzhang.gankkotlin.adapter.DailyGankAdapter
@@ -13,9 +11,7 @@ import com.barryzhang.gankkotlin.entities.GankDate
 import com.barryzhang.gankkotlin.entities.History
 import com.barryzhang.gankkotlin.ext.showActionDialog
 import com.barryzhang.gankkotlin.ui.base.BaseHomeFragment
-import com.barryzhang.temptyview.TEmptyView
 import com.barryzhang.temptyview.TViewUtil
-import java.util.*
 
 /**
  * barryhappy2010@gmail.com
@@ -28,8 +24,9 @@ class MainFragment : BaseHomeFragment(), MainContract.View {
     lateinit var p: MainContract.Presenter
 
     val adapter: DailyGankAdapter by lazy { DailyGankAdapter(activity) }
-    val history: History by lazy { activity.intent.getSerializableExtra("history") as History }
+    val history: History by lazy { activity.intent?.getSerializableExtra("history") as History }
     val lastDay: GankDate by lazy { GankDate(history.results?.first() ?: "") }
+    lateinit var currentDay: GankDate
 
     @BindView(R.id.recyclerView)
     lateinit var recyclerView: RecyclerView
@@ -52,10 +49,15 @@ class MainFragment : BaseHomeFragment(), MainContract.View {
                 .getInstance(context)
                 .setEmptyText("/(ㄒoㄒ)/")
                 .setShowText(true)
+//                .setShowButton(true)
+//                .setActionText("重新加载")
+//                .setAction({p.getRemoteData(currentDay)})
                 .bindView(recyclerView)
+        currentDay = lastDay
         p.start()
-        p.getRemoteData(lastDay)
-        recyclerView.post { p.getTitle(lastDay) }
+
+        p.getRemoteData(currentDay)
+        recyclerView.post { p.getTitle(currentDay) }
     }
 
     override fun setPresenter(presenter: MainContract.Presenter) {
@@ -71,15 +73,16 @@ class MainFragment : BaseHomeFragment(), MainContract.View {
         setActivityTitle(title)
     }
 
-    override fun setDate(date: String?) {
-        mParent.setPageTitle(date)
+    override fun setDate(date: GankDate) {
+        currentDay = date
+        p.getTitle(currentDay)
     }
 
     override fun showRetryDialog() {
         activity.showActionDialog("加载失败，是否再试一下？",
                 DialogInterface.OnClickListener {
                     dialogInterface, i ->
-                    p.getRemoteData(lastDay)
+                    p.getRemoteData(currentDay)
                 })
 
     }
