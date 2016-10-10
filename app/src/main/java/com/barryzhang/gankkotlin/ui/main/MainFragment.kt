@@ -47,11 +47,8 @@ class MainFragment : BaseHomeFragment(), MainContract.View {
         recyclerView.adapter = adapter
         TViewUtil.EmptyViewBuilder
                 .getInstance(context)
-                .setEmptyText("/(ㄒoㄒ)/")
+                .setEmptyText("(ㄒoㄒ)")
                 .setShowText(true)
-//                .setShowButton(true)
-//                .setActionText("重新加载")
-//                .setAction({p.getRemoteData(currentDay)})
                 .bindView(recyclerView)
         currentDay = lastDay
         p.start()
@@ -84,7 +81,6 @@ class MainFragment : BaseHomeFragment(), MainContract.View {
                     dialogInterface, i ->
                     p.getRemoteData(currentDay)
                 })
-
     }
 
     override fun getActivityInstance(): Activity = mParent

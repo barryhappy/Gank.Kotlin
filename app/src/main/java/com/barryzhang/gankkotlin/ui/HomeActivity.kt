@@ -135,6 +135,7 @@ class HomeActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
             showFragment(0)
         } else {
             super.onBackPressed()
+            System.exit(0)
         }
 
     }
