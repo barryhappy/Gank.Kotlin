@@ -9,7 +9,7 @@ import com.barryzhang.gankkotlin.ext.d
 
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.orm.SugarApp
-import com.squareup.leakcanary.LeakCanary
+//import com.squareup.leakcanary.LeakCanary
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -27,7 +27,7 @@ class App : SugarApp() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        LeakCanary.install(this)
+//        LeakCanary.install(this)
         Fresco.initialize(this)
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks{
