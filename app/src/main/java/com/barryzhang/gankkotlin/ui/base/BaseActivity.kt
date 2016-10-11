@@ -14,7 +14,7 @@ import java.util.*
 
 abstract class BaseActivity : AppCompatActivity(){
 
-    val isDebug = true
+    val isDebug = false
     var mLoadingDialog : LoadingDialog? = null
 
     val subscriberList: ArrayList<Subscriber<*>> by lazy { ArrayList<Subscriber<*>>()}
