@@ -1,7 +1,7 @@
 ## 关于`Gank.Kotlin`
 Gank.io(干货集中营)的八百个客户端之一，这次的不同之处在于：主要开发语言为Kotlin。
-当然，还有标配的MVP模式、以及RxJava、Retrofit、ButterKnife等。
-——撸这个客户端主要目的是学习，所以有很多地方可能不是很成熟，欢迎大家一起交流。 
+当然，还有标配的MVP模式、以及RxJava、Retrofit、ButterKnife等。  
+——功能比较简单，撸这个客户端主要目的是学习，所以有很多地方可能不是很成熟，欢迎大家一起交流。 
  
 感谢作者[代码家](https://github.com/daimajia)提供的api：<http://gank.io/api>
 
@@ -11,7 +11,7 @@ Gank.io(干货集中营)的八百个客户端之一，这次的不同之处在�
 ## 关于`Kotlin`
 JVM上运行的另一种编程语言——比Java更『优雅』 :-D
 
- 关于Kotlin，一些有用的链接：
+关于Kotlin，一些有用的链接：
 
 * [官网](https://kotlinlang.org/)
 * [官网：中文](http://kotlinlang.cn/)
